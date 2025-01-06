@@ -1,0 +1,19 @@
+{
+  "proxies": { },
+
+  "headers": {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.140 Safari/537.36"
+  },
+
+  "search_queries": [
+    {"keywords": "Software Engineer Intern", "location": "United States", "f_WT": ""}
+
+  ],
+
+  "pages_to_scrape": 5,
+  "timespan": "r86400",
+  "desc_words": [],
+  "title_exclude": [],
+  "title_include": [],
+  "languages": ["en"]
+}
