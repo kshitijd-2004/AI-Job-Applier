@@ -70,6 +70,31 @@ def get_jobcards(config):
             print(f"Finished scraping page: {url}")
     return all_jobs
 
+import csv
+
+def save_to_csv(jobs, filename="linkedin_jobs.csv"):
+    """
+    Save job data to a CSV file.
+    """
+    # Define the CSV headers
+    headers = ["Title", "Company", "Location", "Date", "Job URL"]
+
+    # Write data to the CSV file
+    with open(filename, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.DictWriter(file, fieldnames=headers)
+        writer.writeheader()  # Write the headers
+        for job in jobs:
+            writer.writerow({
+                "Title": job['title'],
+                "Company": job['company'],
+                "Location": job['location'],
+                "Date": job['date'],
+                "Job URL": job['job_url'],
+            })
+
+    print(f"Jobs saved to {filename}!")
+
+
 def main(config_file):
     start_time = tm.perf_counter()
     config = load_config(config_file)
@@ -78,12 +103,12 @@ def main(config_file):
     all_jobs = get_jobcards(config)
     print(f"Total jobs scraped: {len(all_jobs)}")
 
-    # Display the scraped jobs
-    for job in all_jobs:
-        print(f"Title: {job['title']}, Company: {job['company']}, Location: {job['location']}, Date: {job['date']}, URL: {job['job_url']}")
+    # Save jobs to a CSV file
+    save_to_csv(all_jobs)
 
     end_time = tm.perf_counter()
     print(f"Scraping finished in {end_time - start_time:.2f} seconds")
+
 
 if __name__ == "__main__":
     config_file = 'config.json'  # default config file
